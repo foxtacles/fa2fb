@@ -11,4 +11,4 @@ Create a file 'config.php' (see config_new.php). Add your Facebook app details, 
 
 Append:
 
-*/1 * * * * php -f /home/foxtacles/fa2fb/fa2fb.php &> /dev/null
+> */1 * * * * php -f /home/foxtacles/fa2fb/fa2fb.php &> /dev/null
