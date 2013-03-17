@@ -29,6 +29,17 @@ $facebook = new Facebook(array(
 
 $facebook->setAccessToken($FB_AUTH);
 
+$accounts = $facebook->api('/me/accounts');
+
+$FB_AUTH = null;
+
+foreach ($accounts['data'] as $account)
+	if ($account['id'] == $FB_PAGE)
+		$FB_AUTH = $account['access_token'];
+
+if (!$FB_AUTH)
+	exit('Could not find access token for page');
+
 if (!empty($submissions)) {
 	if ($last == '') {
 		file_put_contents('last_submission', $submissions[0]);
@@ -56,7 +67,7 @@ if (!empty($submissions)) {
 
 				$title = $titles[$i - 1];
 
-				$facebook->api('/' . $FB_PAGE . '/feed', 'post', array('link' => $url, 'picture' => $img, 'caption' => $title, 'message' => $title));
+				$facebook->api('/' . $FB_PAGE . '/feed', 'post', array('access_token' => $FB_AUTH, 'link' => $url, 'picture' => $img, 'caption' => $title, 'message' => $title));
 
 				--$i;
 			}
