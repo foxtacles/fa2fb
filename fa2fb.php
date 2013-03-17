@@ -56,7 +56,7 @@ if (!empty($submissions)) {
 
 				$title = $titles[$i - 1];
 
-				$facebook->api('/' . $FB_PAGE . '/wall', 'post', array('link' => $url, 'picture' => $img, 'caption' => $title, 'message' => $title));
+				$facebook->api('/' . $FB_PAGE . '/feed', 'post', array('link' => $url, 'picture' => $img, 'caption' => $title, 'message' => $title));
 
 				--$i;
 			}
