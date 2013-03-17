@@ -18,7 +18,7 @@ include('config.php');
 include('facebook.php');
 
 $data = file_get_contents($FA_URL);
-$last = @file_get_contents('last_submission');
+$last = @file_get_contents(dirname(__FILE__) . '/last_submission');
 
 $submissions = collect($data, 'sid_', '"');
 
@@ -42,7 +42,7 @@ if (!$FB_AUTH)
 
 if (!empty($submissions)) {
 	if ($last == '') {
-		file_put_contents('last_submission', $submissions[0]);
+		file_put_contents(dirname(__FILE__) . '/last_submission', $submissions[0]);
 	}
 	else {
 		$last = trim($last);
@@ -53,7 +53,7 @@ if (!empty($submissions)) {
 
 		if (!empty($submissions)) {
                 	$last = $submissions[0];
-			file_put_contents('last_submission', $last);
+			file_put_contents(dirname(__FILE__) . '/last_submission', $last);
                 	$submissions = array_reverse($submissions);
 
 			$i = count($submissions);
