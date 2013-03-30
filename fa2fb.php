@@ -50,6 +50,11 @@ if (!empty($submissions)) {
 
 		if ($find !== false)
 			$submissions = array_slice($submissions, 0, $find);
+		else
+		{
+			file_put_contents(dirname(__FILE__) . '/last_submission', $submissions[0]);
+			exit();
+		}
 
 		if (!empty($submissions)) {
                 	$last = $submissions[0];
